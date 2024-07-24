@@ -49,11 +49,14 @@ if uploaded_file is not None:
     st.write("Transcribing...")
     transcript = transcribe_audio(uploaded_file)
     st.write("Transcript:", transcript)
-if transcript:
-    st.write("Analyzing sentiment...")
-    sentiment = analyze_sentiment(transcript)
-    st.write("Sentiment:", sentiment[0]['label'], "with score", sentiment[0]['score'])
-    st.write("Suggestions for Improvement:")
-    suggestions = suggest_improvements(sentiment[0]['label'], transcript)
-    for suggestion in suggestions:
+if transcript and transcript not in ["Could not understand audio", "Request error from Google Speech Recognition service"]:
+        st.write("Analyzing sentiment...")
+        sentiment = analyze_sentiment(transcript)
+        st.write("Sentiment:", sentiment[0]['label'], "with score", sentiment[0]['score'])
+
+        st.write("Suggestions for Improvement:")
+        suggestions = suggest_improvements(sentiment[0]['label'], transcript)
+        for suggestion in suggestions:
             st.write("-", suggestion)
+    else:
+        st.write("Error in transcription:", transcript)

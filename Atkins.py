@@ -58,5 +58,5 @@ if transcript and transcript not in ["Could not understand audio", "Request erro
         suggestions = suggest_improvements(sentiment[0]['label'], transcript)
         for suggestion in suggestions:
             st.write("-", suggestion)
-    else:
-        st.write("Error in transcription:", transcript)
+else:
+    st.write("Error in transcription:", transcript)
